@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int             @id @default(autoincrement())
+  email           String          @unique
+  firstName       String
+  lastName        String
+  surName         String
+  password        String
+  avatarUrl       String
+  updatedAt       DateTime        @updatedAt()
+  createdAt       DateTime        @default(now())
+  projectMember   ProjectMember[]
+  youAddToProject ProjectMember[] @relation("whoAdded")
+}
+
+enum BUCKET {
+  IMAGES
+  DOCUMENTS
+  OTHER
+}
+
+model Media {
+  url       String   @id
+  bucket    BUCKET
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id            Int             @id @default(autoincrement())
+  name          String
+  updatedAt     DateTime        @updatedAt()
+  createdAt     DateTime        @default(now())
+  projectMember ProjectMember[]
+}
+
+model ProjectMember {
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+
+  joinedAt DateTime @default(now())
+
+  whoAdded   User? @relation("whoAdded", fields: [whoAddedId], references: [id])
+  whoAddedId Int
+
+  @@id([userId, projectId])
+}

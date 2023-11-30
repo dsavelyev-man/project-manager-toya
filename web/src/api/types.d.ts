@@ -1,0 +1,1 @@
+export type PostRequest<T, K> = (data: T) => Promise<K>
