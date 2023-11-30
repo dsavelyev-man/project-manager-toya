@@ -1,8 +1,27 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {config as envConfig} from "dotenv";
+import * as path from "path";
+import config from "./config";
+import {Logger} from "@nestjs/common";
+
+envConfig({
+  path: path.join(process.cwd(), "..", ".env")
+})
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      origin: [process.env.WEB_URL]
+    }
+  });
+
+  app.setGlobalPrefix("api")
+
+  config(app)
+
+  await app.listen(process.env.API_PORT, () => {
+    Logger.log(`Server started on http://localhost:${process.env.API_PORT}`)
+  });
 }
 bootstrap();
