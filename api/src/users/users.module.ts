@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import {CacheModule} from "@nestjs/cache-manager";
 import {AuthModule} from "../auth/auth.module";
-import {PrismaService} from "../prisma.service";
+import {PrismaService} from "../prisma/prisma.service";
 import {MailModule} from "../mail/mail.module";
 
 @Module({

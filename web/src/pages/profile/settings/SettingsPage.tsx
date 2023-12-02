@@ -3,12 +3,13 @@ import Default from "../../../components/layout/Default.tsx";
 import Header from "./Header.tsx";
 
 const SettingsPage = () => {
-  const user = useUserStore((s) => s.user)
+  const userStore = useUserStore();
 
+  return (
+    <Default>
+      <Header {...userStore.user} set={userStore.set} />
+    </Default>
+  );
+};
 
-  return <Default>
-    <Header {...user}/>
-  </Default>
-}
-
-export default SettingsPage
+export default SettingsPage;

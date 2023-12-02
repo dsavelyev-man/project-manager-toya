@@ -4,8 +4,7 @@ import { IsNotEmpty, Length } from 'class-validator';
 export class NewPasswordDto {
   @ApiProperty({
     format: 'string',
-    title: 'Password',
-    description: 'Пароль',
+    title: 'Пароль',
   })
   @IsNotEmpty()
   @Length(6, 124)
@@ -13,7 +12,7 @@ export class NewPasswordDto {
 
   @ApiProperty({
     format: 'string',
-    title: 'Repeat password',
+    title: 'Повторите пароль',
     description: 'Должен быть идентичен password',
   })
   @IsNotEmpty()
@@ -30,8 +29,8 @@ export class NewPasswordDto {
 
   @ApiProperty({
     format: 'string',
-    title: 'почта полученная из ссылки',
-    description: 'приходит на почту',
+    title: 'Почта',
+    description: 'хранится в ссылке',
   })
   @IsNotEmpty()
   email: string;

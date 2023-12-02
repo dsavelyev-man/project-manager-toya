@@ -1,8 +1,8 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Inject, Injectable, OnModuleInit} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {ERRORS, User} from "database"
-import {PrismaService} from "../prisma.service";
+import {ERRORS, User, ROLES} from "database"
+import {PrismaService} from "../prisma/prisma.service";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {MailService} from "../mail/mail.service";
 import {randomBytes} from "crypto";
@@ -13,7 +13,7 @@ import {hash} from "../helpers/password";
 import { Cache } from 'cache-manager';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   public static EXCLUDE_FIELDS: (keyof User)[] = ['password'];
 
   constructor(
@@ -21,6 +21,25 @@ export class UsersService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private mailService: MailService,
   ) {}
+
+  async onModuleInit() {
+    const exists = !!(await this.prisma.user.findFirst({
+      where: { email: process.env.ADMIN_EMAIL }
+    }))
+
+    if(!exists) {
+      await this.prisma.user.create({
+        data: {
+          email: process.env.ADMIN_EMAIL,
+          password: await hash(process.env.ADMIN_PASSWORD),
+          role: ROLES.ADMIN,
+          firstName: "Admin",
+          lastName: "Admin",
+          surName: "Admin"
+        }
+      })
+    }
+  }
 
   getRandomCode() {
     const chars = [];
