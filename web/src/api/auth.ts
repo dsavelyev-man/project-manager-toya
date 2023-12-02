@@ -1,12 +1,15 @@
-import {PostRequest} from "./types";
+import {GetRequest, PostRequest} from "./types";
 import { User } from "database"
 import axios from "axios";
 
-const signIn: PostRequest<{
+export const signIn: PostRequest<{
   email: string
   password: string
 }, User> = async (data) => {
-  return axios.post("/auth", data)
+  return (await axios.post("/auth", data)).data
 }
 
-export default signIn
+export const auth: GetRequest<User> = async () => {
+  return (await axios.get<User>("/auth")).data
+}
+

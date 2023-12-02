@@ -17,6 +17,10 @@ export default ({mode}) => {
   }
 
   return defineConfig({
+    server: {
+      port: parseInt(process.env.WEB_PORT)
+    },
+
     plugins: [react()],
   })
 }

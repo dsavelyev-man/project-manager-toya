@@ -1,13 +1,14 @@
 import {Link} from "react-router-dom";
 import useFormWithRequest from "../../hooks/useFormWithRequest.ts";
-import signIn from "../../api/auth.ts";
+import {signIn} from "../../api/auth.ts";
 
 const SignInPage = () => {
   const form = useFormWithRequest({
     email: "",
     password: ""
-  }, signIn, (res) => {
-    console.log(res)
+  }, signIn, () => {
+    //сделано черз ванильный js что бы подргузить печенюху
+    window.location.href = "/"
   })
 
   return <div className="flex justify-center items-center h-screen">

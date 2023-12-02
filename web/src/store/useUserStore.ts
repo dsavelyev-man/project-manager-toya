@@ -11,9 +11,13 @@ const initialState: {
   isGuest: true
 }
 
-const useUserStore = create((set) => ({
+type useUserStore = {
+  load: (user: User) => void
+} & typeof initialState
+
+const useUserStore = create<useUserStore>((set) => ({
   ...initialState,
-  load: (user: User) => set((s: typeof initialState) => ({...s, loaded: true, isGuest: !!user, user }))
+  load: (user) => set((s: typeof initialState) => ({...s, loaded: true, isGuest: !user, user }))
 }))
 
 export default useUserStore

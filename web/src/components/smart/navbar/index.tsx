@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 
 const Navbar = () => {
@@ -17,12 +18,12 @@ const Navbar = () => {
         </div>
         <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
           <li>
-            <a className="justify-between">
+            <Link to="/profile" className="justify-between">
               Profile
-              <span className="badge">New</span>
-            </a>
+              <span className="badge badge-info">soon</span>
+            </Link>
           </li>
-          <li><a>Settings</a></li>
+          <li><Link to="/profile/settings">Settings</Link></li>
         </ul>
       </div>
     </div>
