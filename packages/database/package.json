@@ -5,9 +5,12 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "dev": "tsc --watch",
     "db:generate": "dotenv -e ../../.env prisma generate",
-    "db:migrate": "dotenv -e ../../.env prisma migrate"
+    "db:migrate:dev": "dotenv -e ../../.env prisma migrate dev",
+    "db:migrate:prod": "dotenv -e ../../.env prisma migrate     db:migrate:dev: dotenv -e ../../.env prisma migrate dev"
   },
+  "main": "dist/index.ts",
   "devDependencies": {
     "dotenv-cli": "^7.3.0",
     "prisma": "^5.6.0",

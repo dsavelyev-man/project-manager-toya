@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "THEME" AS ENUM ('DARK', 'LIGHT');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "theme" "THEME" NOT NULL DEFAULT 'DARK';

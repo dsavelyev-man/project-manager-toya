@@ -17,11 +17,23 @@ model User {
   lastName        String
   surName         String
   password        String
-  avatarUrl       String
+  avatarUrl       String?
   updatedAt       DateTime        @updatedAt()
   createdAt       DateTime        @default(now())
   projectMember   ProjectMember[]
   youAddToProject ProjectMember[] @relation("whoAdded")
+  role            ROLES           @default(USER)
+  theme           THEME           @default(DARK)
+}
+
+enum THEME {
+  DARK
+  LIGHT
+}
+
+enum ROLES {
+  ADMIN
+  USER
 }
 
 enum BUCKET {
