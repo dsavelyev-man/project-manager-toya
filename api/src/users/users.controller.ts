@@ -64,6 +64,12 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @Patch()
+  @UseGuards(AuthGuard)
+  updateCurrentUser(@Req() req, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(req.user.id, updateUserDto);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
