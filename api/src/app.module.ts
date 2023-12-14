@@ -13,13 +13,13 @@ import { StorageModule } from './storage/storage.module';
   imports: [
     StorageModule,
     PrometheusModule.register(),
-    // ServeStaticModule.forRoot({
-    //   serveRoot: '/static',
-    //   rootPath: path.join(process.cwd(), 'static'),
-    // }),
-    // UsersModule,
-    // AuthModule,
-    // MailModule,
+    ServeStaticModule.forRoot({
+      serveRoot: '/static',
+      rootPath: path.join(process.cwd(), 'static'),
+    }),
+    UsersModule,
+    AuthModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
