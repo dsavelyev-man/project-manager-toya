@@ -7,9 +7,11 @@ import { AuthModule } from './auth/auth.module';
 import * as path from 'path';
 import { MailModule } from './mail/mail.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
+    StorageModule,
     PrometheusModule.register(),
     ServeStaticModule.forRoot({
       serveRoot: '/static',

@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import "./assets/index.scss"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./assets/index.scss";
 import Router from "./Router.tsx";
 import configAxios from "./api/configAxios.ts";
 
-configAxios()
+configAxios();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-   <Router/>
+    <Router />
   </React.StrictMode>,
-)
+);

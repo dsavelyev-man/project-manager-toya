@@ -27,7 +27,7 @@ const constants: {
   apiUrl: string;
   theme: "dark";
 } = {
-  apiUrl: import.meta.env.VITE_API_URL,
+  apiUrl: "/api",
   theme: "dark",
 };
 

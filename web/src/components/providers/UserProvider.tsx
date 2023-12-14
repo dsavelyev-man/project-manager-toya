@@ -1,30 +1,24 @@
-import {PropsWithChildren, useEffect} from "react";
+import { PropsWithChildren, useEffect } from "react";
 import useUserStore from "../../store/useUserStore.ts";
-import {auth} from "../../api/auth.ts";
+import { auth } from "../../api/auth.ts";
 
 const UserProvider = (props: PropsWithChildren) => {
   const userStore = useUserStore();
 
   const getUser = async () => {
     try {
-      const user = await auth()
-      userStore.load(user)
+      const user = await auth();
+      userStore.load(user);
     } catch (e: any) {
-      if(e.response.status === 403) {
-        window.location.href = "/sign-in"
-      }
+      window.location.href = "/sign-in";
     }
-  }
+  };
 
   useEffect(() => {
-    getUser()
+    getUser();
   }, []);
 
-  return <>
-    {
-      !userStore.isGuest && props.children
-    }
-  </>
-}
+  return <>{!userStore.isGuest && props.children}</>;
+};
 
-export default UserProvider
+export default UserProvider;

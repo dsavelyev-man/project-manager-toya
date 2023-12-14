@@ -9,6 +9,22 @@ export class UpdateUserDto {
     title: 'Имя',
   })
   @IsOptional()
-  @Length(6, 124)
+  @Length(2, 124)
   firstName: string;
+
+  @ApiProperty({
+    format: 'string',
+    title: 'Фамилия',
+  })
+  @IsOptional()
+  @Length(2, 124)
+  lastName: string;
+
+  @ApiProperty({
+    format: 'string',
+    title: 'Отчество',
+  })
+  @IsOptional()
+  @Length(2, 124)
+  surName: string;
 }

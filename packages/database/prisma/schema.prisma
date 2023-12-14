@@ -37,13 +37,13 @@ enum ROLES {
 }
 
 enum BUCKET {
-  IMAGES
-  DOCUMENTS
-  OTHER
+  images
+  documents
+  other
 }
 
 model Media {
-  url       String   @id
+  filename  String   @id
   bucket    BUCKET
   createdAt DateTime @default(now())
 }

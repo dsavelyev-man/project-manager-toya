@@ -1,14 +1,16 @@
 import useUserStore from "../../../store/useUserStore.ts";
 import Default from "../../../components/layout/Default.tsx";
-import Header from "./Header.tsx";
-import { useEffect } from "react";
+import Header from "./components/Header.tsx";
+import { useCallback, useEffect } from "react";
 import { updateCurrentUser } from "../../../api/users.ts";
+import * as debounce from "debounce";
 
 const SettingsPage = () => {
   const userStore = useUserStore();
+  const updateUser = useCallback(debounce(updateCurrentUser, 200), []);
 
   useEffect(() => {
-    updateCurrentUser(userStore.user);
+    updateUser(userStore.user);
   }, [userStore.user]);
 
   return (

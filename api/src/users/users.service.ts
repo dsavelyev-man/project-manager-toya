@@ -96,6 +96,8 @@ export class UsersService implements OnModuleInit {
       },
       data: {
         firstName: updateUserDto.firstName,
+        lastName: updateUserDto.lastName,
+        surName: updateUserDto.surName,
       },
       select: prismaExclude('User', UsersService.EXCLUDE_FIELDS),
     });
