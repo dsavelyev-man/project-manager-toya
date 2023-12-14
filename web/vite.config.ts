@@ -16,9 +16,12 @@ export default ({ mode }) => {
     process.env["VITE_" + key] = process.env[key];
   }
 
+  console.log(process.env.API_URL);
+
   return defineConfig({
     server: {
       port: parseInt(process.env.WEB_PORT),
+      host: "0.0.0.0",
 
       proxy: {
         "/api": {

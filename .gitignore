@@ -4,3 +4,5 @@ node_modules
 yarn-error.log
 db
 minio
+.env.docker
+package-lock.json
