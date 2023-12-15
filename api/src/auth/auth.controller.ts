@@ -1,18 +1,30 @@
-import {Body, Controller, Get, HttpException, HttpStatus, Post, Req, Res, UseGuards} from '@nestjs/common';
-import {ApiOperation} from "@nestjs/swagger";
-import {SignInDto} from "./dto/sign-in.dto";
-import {UsersService} from "../users/users.service";
-import {AuthGuard} from "./auth.guard";
-import exclude from "../helpers/exclude";
-import {verify} from "../helpers/password";
-import { Response } from "express";
-import {AuthService} from "./auth.service";
-import { ERRORS } from "database"
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
+import { SignInDto } from './dto/sign-in.dto';
+import { UsersService } from '../users/users.service';
+import { AuthGuard } from './auth.guard';
+import exclude from '../helpers/exclude';
+import { verify } from '../helpers/password';
+import { Response } from 'express';
+import { AuthService } from './auth.service';
+import { ERRORS } from 'shared';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService, private usersService: UsersService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService,
+  ) {}
 
   @ApiOperation({
     summary: 'авторизация пользователя через печенюху',

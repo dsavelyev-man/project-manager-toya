@@ -1,7 +1,7 @@
 import { Options } from 'multer';
 import * as path from 'path';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ERRORS } from 'database';
+import { ERRORS } from 'shared';
 
 export const multerConfigPng: Options = {
   limits: {
@@ -11,7 +11,7 @@ export const multerConfigPng: Options = {
   fileFilter: function (req, file, callback) {
     const ext = path.extname(file.originalname);
 
-    if (ext !== '.png') {
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.webp') {
       return callback(
         new HttpException(ERRORS.ONLY_PNG_ALLOWED, HttpStatus.NOT_ACCEPTABLE),
       );

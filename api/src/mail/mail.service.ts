@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { createTransport } from 'nodemailer';
 import { readFile } from 'fs/promises';
 import * as path from 'path';
-import { ERRORS } from 'database';
+import { ERRORS } from 'shared';
 import hbs from 'handlebars';
 
 type Transporter = ReturnType<typeof createTransport>;

@@ -1,4 +1,4 @@
-import { Prisma } from 'database';
+import { Prisma } from 'shared';
 
 type A<T extends string> = T extends `${infer U}ScalarFieldEnum` ? U : never;
 type Entity = A<keyof typeof Prisma>;

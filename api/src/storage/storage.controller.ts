@@ -7,7 +7,7 @@ import {
   StreamableFile,
 } from '@nestjs/common';
 import { StorageService } from './storage.service';
-import { ERRORS, BUCKET } from 'database';
+import { ERRORS, BUCKET } from 'shared';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('storage')

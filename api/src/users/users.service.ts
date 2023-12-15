@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ERRORS, User, ROLES } from 'database';
+import { ERRORS, User, ROLES, Media } from 'shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { MailService } from '../mail/mail.service';
@@ -124,6 +124,18 @@ export class UsersService implements OnModuleInit {
       where: {
         id,
       },
+    });
+  }
+
+  updateAvatar(id: number, media: Media) {
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        avatarUrl: media.filename,
+      },
+      select: prismaExclude('User', UsersService.EXCLUDE_FIELDS),
     });
   }
 

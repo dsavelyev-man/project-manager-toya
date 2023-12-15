@@ -6,16 +6,9 @@ import { updateCurrentUser } from "../../../api/users.ts";
 import * as debounce from "debounce";
 
 const SettingsPage = () => {
-  const userStore = useUserStore();
-  const updateUser = useCallback(debounce(updateCurrentUser, 200), []);
-
-  useEffect(() => {
-    updateUser(userStore.user);
-  }, [userStore.user]);
-
   return (
     <Default>
-      <Header {...userStore.user} set={userStore.set} />
+      <Header />
     </Default>
   );
 };

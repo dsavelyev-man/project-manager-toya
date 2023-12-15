@@ -10,7 +10,7 @@ COPY ./packages ./packages/
 
 # Install app dependencies
 RUN yarn install
-RUN cd ./packages/database && yarn db:generate
+RUN cd ./packages/shared && yarn db:generate
 
 COPY ./api ./api/
 

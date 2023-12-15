@@ -8,7 +8,9 @@ import {
 } from '@aws-sdk/client-s3';
 import { PrismaService } from '../prisma/prisma.service';
 import * as stream from 'stream';
-import { BUCKET } from 'database';
+import { BUCKET } from 'shared';
+import { Upload } from '@aws-sdk/lib-storage';
+import { extname } from 'path';
 
 @Injectable()
 export class StorageService {
@@ -61,15 +63,21 @@ export class StorageService {
   }
 
   async upload(file: Express.Multer.File, bucket: BUCKET = BUCKET.images) {
-    const filename = crypto.randomUUID() + '.png';
+    const filename = crypto.randomUUID() + extname(file.originalname);
 
-    const res = await this.client.send(
-      new PutObjectCommand({
-        Bucket: bucket,
+    const parallelUploads3 = new Upload({
+      client: this.client,
+      params: {
+        Bucket: 'images',
         Key: filename,
         Body: file.buffer,
-      }),
-    );
+      },
+      queueSize: 4,
+      partSize: 1024 * 1024 * 5,
+      leavePartsOnError: false,
+    });
+
+    await parallelUploads3.done();
 
     return this.prisma.media.create({
       data: {

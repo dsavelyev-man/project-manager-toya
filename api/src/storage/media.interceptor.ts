@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { Express, Request } from 'express';
 import { StorageService } from './storage.service';
-import { Media, User } from 'database';
+import { Media, User } from 'shared';
 import { Multer } from 'multer';
 import { Reflector } from '@nestjs/core';
 import { Bucket } from './storage.buckets';

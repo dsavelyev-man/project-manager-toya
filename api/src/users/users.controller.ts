@@ -11,6 +11,7 @@ import {
   Put,
   UseGuards,
   Req,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -19,6 +20,14 @@ import { PaginationQuery } from '../helpers/pagination';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { NewPasswordDto } from './dto/new-password-dto';
+import {
+  MediaInterceptor,
+  RequestWithMedia,
+} from '../storage/media.interceptor';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfigPng } from '../storage/multer.config';
+import { Bucket } from '../storage/storage.buckets';
+import { BUCKET } from 'shared';
 
 @ApiTags('users')
 @Controller('users')
@@ -68,6 +77,14 @@ export class UsersController {
   @UseGuards(AuthGuard)
   updateCurrentUser(@Req() req, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(req.user.id, updateUserDto);
+  }
+
+  @Put('current/avatar')
+  @UseGuards(AuthGuard)
+  @Bucket(BUCKET.images)
+  @UseInterceptors(FileInterceptor('avatar', multerConfigPng), MediaInterceptor)
+  updateCurrentUserAvatar(@Req() req: RequestWithMedia) {
+    return this.usersService.updateAvatar(req.user.id, req.media);
   }
 
   @Delete(':id')

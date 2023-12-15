@@ -1,0 +1,53 @@
+body {
+    background-color: #262626;
+}
+
+/*.title,*/
+/*.opblock-tag,*/
+/*.opblock-summary-path,*/
+/*.try-out__btn,*/
+/*.opblock-title,*/
+/*.opblock-description-wrapper p,*/
+/*.opblock-section-header h4,*/
+/*.col_header,*/
+/*.response td*/
+h1, h2, h3, h4, h5, h6, p, a, td, th, button, .model-title
+{
+    color: #FFF !important;
+}
+
+.parameters-col_name * {
+    color: #FFF !important;
+}
+
+.opblock-summary-description, .prop-format, .primitive {
+    color: #cbcbcb !important;
+}
+
+.object, .brace-close {
+    color: #a487b9 !important;
+}
+
+.opblock-section-header {
+    background: none !important;
+}
+
+.expand-operation path {
+    fill: #FFF;
+}
+
+.opblock-control-arrow {
+    fill: #FFF;
+}
+
+.model-toggle::after {
+    background: url('data:image/svg+xml;charset=utf-8,<svg fill="white" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"><path d=\"M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"/></svg>') 50% no-repeat !important;
+}
+
+.microlight {
+ background: rgb(44, 42, 42) !important;
+}
+
+.opblock {
+    background: rgb(33, 33, 33) !important;
+}

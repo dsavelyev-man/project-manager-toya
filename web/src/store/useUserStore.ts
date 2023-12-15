@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { User } from "database";
+import { User } from "shared";
 
 const initialState: {
   user: User | undefined;

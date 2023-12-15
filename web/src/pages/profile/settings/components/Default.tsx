@@ -1,36 +1,46 @@
-import { User } from "database";
-import { UseUserStore } from "@/store/useUserStore.ts";
+import { User } from "shared";
+import useUserStore, { UseUserStore } from "@/store/useUserStore.ts";
 import TextInput from "../../../../components/ui/TextInput.tsx";
+import { TabContent } from "@components/ui/Tabs.tsx";
+import * as debounce from "debounce";
+import { updateCurrentUser } from "@/api/users.ts";
 
-const Default = (
-  props: User & {
-    set: UseUserStore["set"];
-  },
-) => {
+const updateUser = debounce(updateCurrentUser, 200);
+
+const Default = () => {
+  const userStore = useUserStore();
+  const set = (key: keyof User, value: string) => {
+    userStore.set(key, value);
+    updateUser({
+      ...userStore.user,
+      [key]: value,
+    });
+  };
+
   return (
-    <div>
+    <TabContent>
       <TextInput
         label="Фамилия"
-        value={props.lastName}
+        value={userStore.user.lastName}
         required
-        onChange={(e) => props.set("lastName", e.target.value)}
+        onChange={(e) => set("lastName", e.target.value)}
         autoComplete="family-name"
       />
       <TextInput
         autoComplete="given-name"
         label="Имя"
         required
-        onChange={(e) => props.set("firstName", e.target.value)}
-        value={props.firstName}
+        onChange={(e) => set("firstName", e.target.value)}
+        value={userStore.user.firstName}
       />
       <TextInput
         label="Отчество"
         required
         autoComplete="additional-name"
-        onChange={(e) => props.set("surName", e.target.value)}
-        value={props.surName}
+        onChange={(e) => set("surName", e.target.value)}
+        value={userStore.user.surName}
       />
-    </div>
+    </TabContent>
   );
 };
 
