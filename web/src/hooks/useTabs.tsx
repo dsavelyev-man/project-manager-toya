@@ -8,7 +8,7 @@ const useTabs = <T extends string | number>(
   const [active, setActive] = useState<TabActive<T>>({
     value: initialActive,
     width: 0,
-    left: 4,
+    left: 0,
   });
 
   return {

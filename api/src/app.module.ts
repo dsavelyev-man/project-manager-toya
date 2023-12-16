@@ -8,6 +8,7 @@ import * as path from 'path';
 import { MailModule } from './mail/mail.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { StorageModule } from './storage/storage.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { StorageModule } from './storage/storage.module';
     UsersModule,
     AuthModule,
     MailModule,
+    ProjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

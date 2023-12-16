@@ -12,10 +12,13 @@ const Navbar = () => {
         <div className="form-control ml-2">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Поиск"
             className="input input-bordered w-24 md:w-auto"
           />
         </div>
+        <Link to="/projects" className="ml-2">
+          Проекты
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">

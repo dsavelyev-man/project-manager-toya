@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 export type Tab<T extends string | number> = {
   label: string;
   value: T;
+  callback?: () => void;
 };
 
 export type TabActive<T extends string | number> = {
@@ -26,14 +27,30 @@ const Tabs = <T extends string | number>(props: {
   active: TabActive<T>;
 }) => {
   const elements = useRef<{ [key in T]?: HTMLDivElement }>({});
-  const arrayOfElements = Object.values(elements.current);
 
   useLayoutEffect(() => {
+    const currentIndex = props.items.findIndex(
+      (item) => item.value === props.active.value,
+    );
+
     props.setActive((s) => ({
       ...s,
       width: elements.current[props.active.value].offsetWidth,
+      left: getLeft(currentIndex),
     }));
   }, []);
+
+  const getLeft = (index: number) => {
+    let left = 4;
+
+    for (const [elIndex, el] of Object.values(elements.current).entries()) {
+      if (elIndex === index) break;
+
+      left = left + (el as HTMLDivElement).offsetWidth;
+    }
+
+    return left;
+  };
 
   return (
     <div role="tablist" className="tabs tabs-boxed relative">
@@ -46,28 +63,27 @@ const Tabs = <T extends string | number>(props: {
           })}
           key={item.value}
           onClick={(e) => {
-            let left = 4;
-
-            for (const [elIndex, el] of arrayOfElements.entries()) {
-              if (elIndex === index) break;
-
-              left = left + (el as HTMLDivElement).offsetWidth;
-            }
-
             props.setActive({
               value: item.value,
               width: e.currentTarget.offsetWidth,
-              left,
+              left: getLeft(index),
             });
+
+            if (item.callback) item.callback();
           }}
         >
           {item.label}
         </div>
       ))}
-      <motion.div
-        animate={{ width: props.active.width, left: props.active.left }}
-        className="tab tab-active absolute transition top-0"
-      ></motion.div>
+      {props.active.left !== 0 ? (
+        <motion.div
+          initial={{ left: props.active.left, width: props.active.width }}
+          animate={{ width: props.active.width, left: props.active.left }}
+          className="tab tab-active absolute top-0"
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const Header = () => {
   const tabs = useTabs(
     [
       {
-        label: "Инфромация",
+        label: "Информация",
         value: "default",
       },
       {
