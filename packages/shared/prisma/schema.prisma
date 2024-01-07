@@ -24,6 +24,7 @@ model User {
   youAddToProject ProjectMember[] @relation("whoAdded")
   role            ROLES           @default(USER)
   theme           THEME           @default(DARK)
+  UserLinks       UserLink[]
 }
 
 enum THEME {
@@ -49,12 +50,29 @@ model Media {
 }
 
 model Project {
-  id        Int             @id @default(autoincrement())
-  name      String
-  updatedAt DateTime        @updatedAt()
-  createdAt DateTime        @default(now())
-  members   ProjectMember[]
-  avatarUrl String?
+  id           Int             @id @default(autoincrement())
+  name         String
+  updatedAt    DateTime        @updatedAt()
+  createdAt    DateTime        @default(now())
+  members      ProjectMember[]
+  avatarUrl    String?
+  UserLinks    UserLink[]
+  ProjectBoard ProjectBoard[]
+
+  @@index([name])
+}
+
+model ProjectBoard {
+  id            Int      @id @default(autoincrement())
+  name          String
+  backgroundUrl String?
+  previewUrl    String?
+  updatedAt     DateTime @updatedAt()
+  createdAt     DateTime @default(now())
+  project       Project  @relation(fields: [projectId], references: [id])
+  projectId     Int
+
+  @@index([name])
 }
 
 enum PROJECT_ROLES {
@@ -63,6 +81,17 @@ enum PROJECT_ROLES {
   QUALITY_ASSURANCE
   PROJECT_MANAGER
   GUEST
+}
+
+model UserLink {
+  id        Int      @id @default(autoincrement())
+  name      String
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  clicks    Int      @default(0)
+  createdAt DateTime @default(now())
 }
 
 model ProjectMember {

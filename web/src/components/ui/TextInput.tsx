@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from "react";
 import classNames from "classnames";
 import { ERRORS } from "shared";
+import { Input } from "@components/ui/Input.tsx";
+import { Label } from "@components/ui/Label.tsx";
 
 const TextInput = (
   props: InputHTMLAttributes<HTMLInputElement> & {
@@ -11,16 +13,16 @@ const TextInput = (
   const { label, error, ...data } = props;
 
   return (
-    <label className="form-control w-full">
-      <div className="label">
-        <span className="label-text">{props.label}</span>
-      </div>
-      <input
+    <div className="space-y-1">
+      <Label htmlFor={props.name} className="form-control w-full">
+        {props.label}
+      </Label>
+      <Input
         {...data}
         type="text"
         className={classNames("input input-bordered", props.className)}
       />
-    </label>
+    </div>
   );
 };
 

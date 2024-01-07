@@ -5,6 +5,13 @@ import getImage from "@/helpers/getImage.ts";
 import { updateAvatar } from "@/api/users.ts";
 import useUserStore from "@/store/useUserStore.ts";
 import classNames from "classnames";
+import { Input } from "@components/ui/Input.tsx";
+import { Label } from "@components/ui/Label.tsx";
+import {
+  Avatar as RAvatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@components/ui/Avatar.tsx";
 
 const AvatarItem = (props: {
   className: string;
@@ -15,11 +22,11 @@ const AvatarItem = (props: {
     <motion.div
       initial={{ filter: `blur(10px)` }}
       animate={{ filter: `blur(0px)`, scale: props.loading ? 0 : 1 }}
-      className="avatar"
     >
-      <div className={classNames("rounded-full", props.className)}>
-        <img src={getImage(props.avatarUrl)} />
-      </div>
+      <RAvatar className={props.className}>
+        <AvatarImage src={getImage(props.avatarUrl)} />
+        <AvatarFallback>AV</AvatarFallback>
+      </RAvatar>
     </motion.div>
   );
 };
@@ -49,20 +56,12 @@ const Avatar = () => {
   return (
     <TabContent>
       <div className="flex items-start">
-        <div className="w-full">
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text">Аватар</span>
-            </div>
-            <input
-              onChange={onUpload}
-              type="file"
-              className="file-input input-bordered w-full max-w-xs"
-            />
-          </label>
+        <div className="w-full space-y-1">
+          <Label className="w-full">Изображение</Label>
+          <Input onChange={onUpload} type="file" className="max-w-xs" />
         </div>
         <div className="flex gap-4 items-start relative">
-          {["h-12 w-12", "h-32 w-32", "h-48 h-48"].map((className, index) => (
+          {["h-12 w-12", "h-32 w-32", "h-48 w-48"].map((className, index) => (
             <AvatarItem
               loading={loading}
               className={className}

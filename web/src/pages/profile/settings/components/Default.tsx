@@ -21,6 +21,7 @@ const Default = () => {
     <TabContent>
       <TextInput
         label="Фамилия"
+        name="lastName"
         value={userStore.user.lastName}
         required
         onChange={(e) => set("lastName", e.target.value)}
@@ -30,12 +31,14 @@ const Default = () => {
         autoComplete="given-name"
         label="Имя"
         required
+        name="firstName"
         onChange={(e) => set("firstName", e.target.value)}
         value={userStore.user.firstName}
       />
       <TextInput
         label="Отчество"
         required
+        name="surName"
         autoComplete="additional-name"
         onChange={(e) => set("surName", e.target.value)}
         value={userStore.user.surName}

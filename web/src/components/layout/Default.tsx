@@ -1,6 +1,7 @@
 import Navbar from "../smart/navbar";
 import { PropsWithChildren } from "react";
 import UserProvider from "../providers/UserProvider.tsx";
+import Sidebar from "@components/smart/sidebar";
 
 const Default = (props: PropsWithChildren) => {
   return (
@@ -8,7 +9,7 @@ const Default = (props: PropsWithChildren) => {
       <div>
         <Navbar />
         <div className="grid grid-cols-[244px,1fr]">
-          <div />
+          <Sidebar />
           <div className="px-4">{props.children}</div>
         </div>
       </div>

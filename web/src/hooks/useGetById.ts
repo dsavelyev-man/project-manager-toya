@@ -15,18 +15,31 @@ const useGetById = <T>(request: GetRequestById<T>) => {
   }>();
 
   const get = async () => {
-    const data = await request(params.id);
+    try {
+      const data = await request(params.id);
 
-    setData((s) => ({
-      ...s,
-      result: data,
-      loading: false,
-    }));
+      setData((s) => ({
+        ...s,
+        result: data,
+        loading: false,
+      }));
+    } catch (e) {
+      console.error(e);
+      setData((s) => ({
+        ...s,
+        result: s.result,
+        loading: false,
+      }));
+    }
   };
 
   useEffect(() => {
+    setData((s) => ({
+      ...s,
+      loading: true,
+    }));
     get();
-  }, []);
+  }, [params]);
 
   return {
     data: data.result,

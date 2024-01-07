@@ -6,13 +6,17 @@ import { PrismaService } from '../prisma/prisma.service';
 import { User, PROJECT_ROLES } from 'shared';
 import prismaExclude from '../helpers/prismaExclude';
 import { UsersService } from '../users/users.service';
+import { LinksService } from '../users/links/links.service';
 
 @Injectable()
 export class ProjectsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private linksService: LinksService,
+  ) {}
 
   async create(createProjectDto: CreateProjectDto, user: User) {
-    return this.prisma.project.create({
+    const project = await this.prisma.project.create({
       data: {
         name: createProjectDto.name,
         members: {
@@ -24,6 +28,16 @@ export class ProjectsService {
         },
       },
     });
+
+    await this.linksService.create(
+      {
+        name: project.name,
+        projectId: project.id,
+      },
+      [user.id],
+    );
+
+    return project;
   }
 
   findAll(paginationParams: PaginationQuery, user: User) {
@@ -68,10 +82,6 @@ export class ProjectsService {
 
       include: {
         members: {
-          where: {
-            role: PROJECT_ROLES.OWNER,
-          },
-
           include: {
             user: {
               select: prismaExclude('User', UsersService.EXCLUDE_FIELDS),

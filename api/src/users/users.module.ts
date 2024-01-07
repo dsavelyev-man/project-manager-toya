@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { PrismaService } from '../prisma/prisma.service';
 import { MailModule } from '../mail/mail.module';
 import { StorageModule } from '../storage/storage.module';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { StorageModule } from '../storage/storage.module';
     forwardRef(() => AuthModule),
     MailModule,
     StorageModule,
+    LinksModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, PrismaService],

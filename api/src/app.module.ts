@@ -9,6 +9,7 @@ import { MailModule } from './mail/mail.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { StorageModule } from './storage/storage.module';
 import { ProjectsModule } from './projects/projects.module';
+import { DiscordModule } from './discord/discord.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ProjectsModule } from './projects/projects.module';
     AuthModule,
     MailModule,
     ProjectsModule,
+    DiscordModule,
   ],
   controllers: [AppController],
   providers: [AppService],

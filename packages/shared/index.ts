@@ -1,4 +1,5 @@
 export * from "@prisma/client";
+
 export enum ERRORS {
   PASSWORD_MISMATCH = "PASSWORD_MISMATCH",
   UNKNOWN_ERROR = "UNKNOWN_ERROR",

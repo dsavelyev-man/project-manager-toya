@@ -1,5 +1,6 @@
 import { createElement, ReactElement, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import checkLoading from "@/helpers/checkLoading.tsx";
 
 const variants = {
   showed: {
@@ -23,17 +24,23 @@ const RowList = <T,>(props: {
         setAnimate("showed");
       }, 100);
   }, [props.loading]);
+
   return (
     <motion.div
       variants={variants}
       animate={animate}
       className="flex flex-col gap-6"
     >
-      {props.items.map((item, index) =>
-        createElement(props.card, {
-          ...item,
-          key: index,
-        }),
+      {checkLoading(
+        props.loading,
+        props.items,
+        <div>Нет записей</div>,
+        props.items.map((item, index) =>
+          createElement(props.card, {
+            ...item,
+            key: index,
+          }),
+        ),
       )}
     </motion.div>
   );

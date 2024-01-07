@@ -53,14 +53,17 @@ const Tabs = <T extends string | number>(props: {
   };
 
   return (
-    <div role="tablist" className="tabs tabs-boxed relative">
+    <div role="tablist" className="bg-muted flex relative p-1 rounded-md">
       {props.items.map((item, index) => (
         <div
           role="tab"
           ref={(e) => (elements.current[item.value] = e)}
-          className={classNames("tab z-[1] transition", {
-            "text-base-100": item.value === props.active.value,
-          })}
+          className={classNames(
+            "tab z-[1] cursor-pointer transition px-3 py-1 text-sm font-medium",
+            {
+              "text-muted-foreground": item.value !== props.active.value,
+            },
+          )}
           key={item.value}
           onClick={(e) => {
             props.setActive({
@@ -79,7 +82,7 @@ const Tabs = <T extends string | number>(props: {
         <motion.div
           initial={{ left: props.active.left, width: props.active.width }}
           animate={{ width: props.active.width, left: props.active.left }}
-          className="tab tab-active absolute top-0"
+          className="h-[calc(100%-0.50rem)] rounded-sm top-[50%] translate-y-[-50%] tab-active absolute bg-black"
         />
       ) : (
         <></>

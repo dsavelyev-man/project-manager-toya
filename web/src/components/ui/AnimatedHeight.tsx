@@ -6,14 +6,14 @@ const AnimatedHeight = (
   props: HTMLAttributes<HTMLDivElement> & MotionProps,
 ) => {
   return (
-    <motion.div
+    <motion.section
       {...props}
       initial={{ height: 0 }}
       animate={{ height: "100%" }}
       className={classNames("overflow-hidden", props.className)}
     >
       {props.children}
-    </motion.div>
+    </motion.section>
   );
 };
 

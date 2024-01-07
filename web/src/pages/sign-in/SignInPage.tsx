@@ -1,52 +1,61 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useFormWithRequest from "../../hooks/useFormWithRequest.ts";
-import {signIn} from "../../api/auth.ts";
+import { signIn } from "../../api/auth.ts";
+import { Input } from "@components/ui/Input.tsx";
+import { Label } from "@components/ui/Label.tsx";
+import { Button } from "@components/ui/Button.tsx";
 
 const SignInPage = () => {
-  const form = useFormWithRequest({
-    email: "",
-    password: ""
-  }, signIn, () => {
-    //сделано черз ванильный js что бы подргузить печенюху
-    window.location.href = "/"
-  })
+  const form = useFormWithRequest(
+    {
+      email: "",
+      password: "",
+    },
+    signIn,
+    () => {
+      //сделано черз ванильный js что бы подргузить печенюху
+      window.location.href = "/";
+    },
+  );
 
-  return <div className="flex justify-center items-center h-screen">
-    <form onSubmit={form.onSubmit} className="card card-bordered w-96 bg-base-100 shadow-xl p-4 gap-4">
-      <label className="form-control w-full">
-        <div className="label">
-          <span className="label-text">Ваша почта</span>
-        </div>
-        <input
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <form
+        onSubmit={form.onSubmit}
+        className="max-w-96 w-full flex flex-col p-4 space-y-2"
+      >
+        <Label htmlFor="email">Ваша почта</Label>
+        <Input
           value={form.data.email}
           onChange={(e) => form.onChange("email", e.target.value)}
           type="email"
+          id="email"
+          name="email"
           autoComplete="email"
           placeholder="example@mail.com"
-          className="input input-bordered"
         />
-      </label>
-      <label className="form-control w-full">
-        <div className="label">
-          <span className="label-text">Ваш пароль</span>
-        </div>
-        <input
+        <Label htmlFor="password">Ваш пароль</Label>
+        <Input
           value={form.data.password}
+          name="password"
+          id="password"
           onChange={(e) => form.onChange("password", e.target.value)}
           type="password"
           autoComplete="password"
           placeholder="••••••••"
-          className="input input-bordered"
         />
-      </label>
-      <div className="flex flex-col gap-2">
-        <button className="btn">Войти</button>
-        <span className="text-sm ml-2">
-          Забыли пароль? <Link className="link" to="/reset/password">Восстановить</Link>
-        </span>
-      </div>
-    </form>
-  </div>
-}
+        <div className="flex flex-col gap-2">
+          <Button className="btn">Войти</Button>
+          <span className="text-sm ml-2">
+            Забыли пароль?{" "}
+            <Link className="link" to="/reset/password">
+              Восстановить
+            </Link>
+          </span>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-export default SignInPage
+export default SignInPage;

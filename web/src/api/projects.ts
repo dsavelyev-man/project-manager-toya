@@ -16,16 +16,18 @@ export const getPaginatedProjects = async (
 
 export const createProject: PostRequest<
   { name: string },
-  ProjectWithOwner
+  ProjectWithMembers
 > = async (data) => {
   return (await axios.post("/projects", data)).data;
 };
 
-export const getProjectById: GetRequestById<ProjectWithOwner> = async (id) => {
+export const getProjectById: GetRequestById<ProjectWithMembers> = async (
+  id,
+) => {
   return (await axios.get(`/projects/${id}`)).data;
 };
 
-export type ProjectWithOwner = Prisma.ProjectGetPayload<{
+export type ProjectWithMembers = Prisma.ProjectGetPayload<{
   include: {
     members: {
       include: {
