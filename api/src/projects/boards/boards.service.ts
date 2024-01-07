@@ -22,4 +22,19 @@ export class BoardsService {
       },
     });
   }
+
+  async getByProject(id: number, user: User) {
+    return this.prisma.projectBoard.findFirstOrThrow({
+      where: {
+        projectId: id,
+        project: {
+          members: {
+            some: {
+              userId: user.id,
+            },
+          },
+        },
+      },
+    });
+  }
 }

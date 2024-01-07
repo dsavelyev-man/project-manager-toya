@@ -81,6 +81,7 @@ export class ProjectsService {
       },
 
       include: {
+        boards: true,
         members: {
           include: {
             user: {

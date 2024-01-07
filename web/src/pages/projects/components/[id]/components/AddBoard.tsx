@@ -12,6 +12,7 @@ import { createBoard } from "@/api/boards.ts";
 import useFormWithRequest from "@/hooks/useFormWithRequest.ts";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@components/ui/Skeleton.tsx";
 
 const AddBoard = (props: { id: number }) => {
   const navigate = useNavigate();
@@ -28,8 +29,20 @@ const AddBoard = (props: { id: number }) => {
     },
   );
 
+  if (props.id === -1) {
+    return (
+      <div className="justify-between flex mt-2 items-center">
+        <h2 className="scroll-m-20 tracking-tight lg:text-xl">Доски</h2>
+        <Button className="bg-muted text-muted hover:bg-muted hover:text-muted">
+          Добавить доску
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <div className="justify-end flex mt-2">
+    <div className="justify-between flex mt-2 items-center">
+      <h2 className="scroll-m-20 tracking-tight lg:text-xl">Доски</h2>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">Добавить доску</Button>

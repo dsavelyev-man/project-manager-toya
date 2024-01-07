@@ -34,6 +34,7 @@ export type ProjectWithMembers = Prisma.ProjectGetPayload<{
         user: true;
       };
     };
+    boards: true;
   };
 }>;
 

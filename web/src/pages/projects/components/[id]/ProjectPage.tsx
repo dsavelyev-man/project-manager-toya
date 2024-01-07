@@ -6,6 +6,9 @@ import getOwnerProject from "@/helpers/getOwnerProject.ts";
 import { Skeleton } from "@components/ui/Skeleton.tsx";
 import { useParams } from "react-router-dom";
 import AddBoard from "@/pages/projects/components/[id]/components/AddBoard.tsx";
+import Boards, {
+  FakeBoards,
+} from "@/pages/projects/components/[id]/components/boards";
 
 const ProjectPage = () => {
   const project = useGetById<ProjectWithMembers>(getProjectById);
@@ -15,11 +18,12 @@ const ProjectPage = () => {
         {project.loading ? (
           <div>
             <Skeleton className="h-[160px]" />
+            <FakeBoards />
           </div>
         ) : project.data ? (
           <>
             <Heading {...project.data} />
-            <AddBoard id={project.data.id} />
+            <Boards {...project.data} />
           </>
         ) : (
           <h1 className="text-4xl text-center text-accent">

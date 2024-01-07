@@ -3,7 +3,7 @@ import { ProjectWithMembers } from "@/api/projects.ts";
 import OwnerBadge from "@components/ui/project/OwnerBadge.tsx";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Card } from "@components/ui/Card.tsx";
+import { Card, CardContent } from "@components/ui/Card.tsx";
 
 const variants = {
   showed: {
@@ -32,7 +32,7 @@ const RowCard = (props: ProjectWithMembers) => {
       variants={variants}
       className="opacity-0 hover:bg-accent transition relative"
     >
-      <div className="card-body p-4">
+      <CardContent className="card-body p-4">
         <div className="flex items-center gap-4">
           <Avatar name={props.name} />
           <div className="flex flex-col gap-2">
@@ -43,7 +43,7 @@ const RowCard = (props: ProjectWithMembers) => {
             />
           </div>
         </div>
-      </div>
+      </CardContent>
       <Link
         to={`/projects/${props.id}`}
         className="absolute left-0 top-0 w-full h-full rounded-xl"

@@ -50,14 +50,14 @@ model Media {
 }
 
 model Project {
-  id           Int             @id @default(autoincrement())
-  name         String
-  updatedAt    DateTime        @updatedAt()
-  createdAt    DateTime        @default(now())
-  members      ProjectMember[]
-  avatarUrl    String?
-  UserLinks    UserLink[]
-  ProjectBoard ProjectBoard[]
+  id        Int             @id @default(autoincrement())
+  name      String
+  updatedAt DateTime        @updatedAt()
+  createdAt DateTime        @default(now())
+  members   ProjectMember[]
+  avatarUrl String?
+  userLinks UserLink[]
+  boards    ProjectBoard[]
 
   @@index([name])
 }
