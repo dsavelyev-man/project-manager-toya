@@ -26,4 +26,10 @@ export class BoardsController {
   getByProject(@Param('id') id: string, @Req() req) {
     return this.boardsService.getByProject(+id, req.user);
   }
+
+  @Get(':id')
+  @UseGuards(AuthGuard)
+  getById(@Param('id') id: string, @Req() req) {
+    return this.boardsService.getById(+id, req.user);
+  }
 }

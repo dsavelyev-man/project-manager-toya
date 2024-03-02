@@ -3,7 +3,8 @@ import HomePage from "./pages/HomePage.tsx";
 import SignInPage from "./pages/sign-in/SignInPage.tsx";
 import SettingsPage from "./pages/profile/settings/SettingsPage.tsx";
 import ProjectsPage from "@/pages/projects/ProjectsPage.tsx";
-import ProjectPage from "@/pages/projects/components/[id]/ProjectPage.tsx";
+import ProjectPage from "@/pages/projects/pages/[id]/ProjectPage.tsx";
+import Board from "@/pages/projects/pages/[id]/pages/boards/[boardId]/Board.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/projects/:id",
     element: <ProjectPage />,
+  },
+  {
+    path: "/projects/:id/boards/:boardId",
+    element: <Board />,
   },
   {
     path: "/sign-in",

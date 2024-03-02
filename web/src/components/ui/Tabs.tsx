@@ -59,9 +59,10 @@ const Tabs = <T extends string | number>(props: {
           role="tab"
           ref={(e) => (elements.current[item.value] = e)}
           className={classNames(
-            "tab z-[1] cursor-pointer transition px-3 py-1 text-sm font-medium",
+            "tab z-[1] cursor-pointer transition px-3 py-1 text-sm font-medium ",
             {
-              "text-muted-foreground": item.value !== props.active.value,
+              "": item.value !== props.active.value,
+              "text-white": item.value === props.active.value,
             },
           )}
           key={item.value}

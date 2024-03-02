@@ -2,7 +2,7 @@ import Default from "@components/layout/Default.tsx";
 import useTabs from "@/hooks/useTabs.tsx";
 import ProjectstList from "@/pages/projects/components/ProjectstList.tsx";
 import { useNavigate } from "react-router-dom";
-import CreateProject from "@/pages/projects/components/create/CreateProject.tsx";
+import CreateProject from "@/pages/projects/pages/create/CreateProject.tsx";
 
 const ProjectsPage = (props: { active: "list" | "create" }) => {
   const navigate = useNavigate();

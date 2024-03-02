@@ -20,23 +20,25 @@ const CreateProject = () => {
   );
 
   return (
-    <AnimatedHeight className="mt-6 shadow-xl w-full relative">
-      <Card className="pt-6">
-        <CardContent>
-          <form
-            onSubmit={form.onSubmit}
-            className="max-w-[320px] flex flex-col gap-4 items-start"
-          >
-            <TextInput
-              value={form.data.name}
-              onChange={(e) => form.onChange("name", e.target.value)}
-              label="Название проекта"
-            />
-            <Button type="submit">Создать</Button>
-          </form>
-        </CardContent>
-      </Card>
-    </AnimatedHeight>
+    <div className="flex">
+      <AnimatedHeight className="mt-6 shadow-xl w-full relative">
+        <Card className="pt-6">
+          <CardContent>
+            <form
+              onSubmit={form.onSubmit}
+              className="max-w-[320px] flex flex-col gap-4 items-start"
+            >
+              <TextInput
+                value={form.data.name}
+                onChange={(e) => form.onChange("name", e.target.value)}
+                label="Название проекта"
+              />
+              <Button type="submit">Создать</Button>
+            </form>
+          </CardContent>
+        </Card>
+      </AnimatedHeight>
+    </div>
   );
 };
 

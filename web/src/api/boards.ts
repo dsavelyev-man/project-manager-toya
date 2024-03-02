@@ -1,4 +1,4 @@
-import { PostRequest } from "@/api/types";
+import { GetRequestByParams, PostRequest } from "@/api/types";
 import axios from "axios";
 import { Project, ProjectBoard } from "shared";
 
@@ -19,10 +19,19 @@ export const getBoardsByProject = async (
   },
 ): Promise<ProjectBoard[]> => {
   return (
-    await axios.get(`/projects/boards/${extra.id}`, {
+    await axios.get(`/projects/boards/by-project/${extra.id}`, {
       params: {
         page,
       },
     })
   ).data;
+};
+
+export const getBoardById: GetRequestByParams<
+  ProjectBoard,
+  {
+    boardId: string;
+  }
+> = async (params) => {
+  return (await axios.get(`/projects/boards/${params.boardId}`, {})).data;
 };

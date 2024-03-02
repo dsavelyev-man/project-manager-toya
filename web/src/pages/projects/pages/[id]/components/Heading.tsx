@@ -5,7 +5,7 @@ import getOwnerProject from "@/helpers/getOwnerProject.ts";
 import { ProjectWithMembers } from "@/api/projects.ts";
 
 import { Link } from "react-router-dom";
-import Actions from "@/pages/projects/components/[id]/components/Actions.tsx";
+import Actions from "@/pages/projects/pages/[id]/components/Actions.tsx";
 import { Card, CardContent } from "@components/ui/Card.tsx";
 import React from "react";
 import { Users } from "lucide-react";

@@ -1,4 +1,4 @@
-import AddBoard from "@/pages/projects/components/[id]/components/AddBoard.tsx";
+import AddBoard from "@/pages/projects/pages/[id]/components/AddBoard.tsx";
 import useGetRows from "@/hooks/useGetRows.ts";
 import { getBoardsByProject } from "@/api/boards.ts";
 import { ProjectWithMembers } from "@/api/projects.ts";

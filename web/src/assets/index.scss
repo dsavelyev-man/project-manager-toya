@@ -94,10 +94,16 @@ html {
   }
 
   &::-webkit-scrollbar-track {
-    //@apply bg-base-200 rounded-full
+    border-radius: 10000px;
+    background-color: var(--muted);
   }
 
   &::-webkit-scrollbar-thumb {
-    //@apply bg-base-300 rounded-full hover:bg-primary/40
+    border-radius: 10000px;
+    background-color: var(--muted);
+
+    &:hover {
+      background-color: var(--primary);
+    }
   }
 }

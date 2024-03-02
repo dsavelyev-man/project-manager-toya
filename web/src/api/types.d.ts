@@ -5,3 +5,6 @@ export type GetRequestPaginated<K, T extends object> = (
   extra?: T,
 ) => Promise<K[]>;
 export type GetRequestById<K> = (id: string | number) => Promise<K>;
+export type GetRequestByParams<K, P extends { [key: string]: string }> = (
+  params: P,
+) => Promise<K>;
