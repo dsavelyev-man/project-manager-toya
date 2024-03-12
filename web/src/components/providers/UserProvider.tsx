@@ -15,7 +15,9 @@ const UserProvider = (props: PropsWithChildren) => {
   };
 
   useEffect(() => {
-    getUser();
+    if (!userStore.loaded) {
+      getUser();
+    }
   }, []);
 
   return <>{!userStore.isGuest && props.children}</>;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetRequestPaginated } from "@/api/types";
 
-const useGetRows = <T>(request: GetRequestPaginated<T>) => {
+const useGetRows = <T, K>(request: GetRequestPaginated<T, K>) => {
   const [data, setData] = useState<{
     items: T[];
     loading: boolean;

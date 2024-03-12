@@ -93,6 +93,21 @@ export class ProjectsService {
     });
   }
 
+  async findOneTeam(id: number) {
+    return {
+      members: await this.prisma.projectMember.findMany({
+        where: {
+          projectId: id,
+        },
+        include: {
+          user: {
+            select: prismaExclude('User', UsersService.EXCLUDE_FIELDS),
+          },
+        },
+      }),
+    };
+  }
+
   update(id: number, updateProjectDto: UpdateProjectDto) {
     return `This action updates a #${id} project`;
   }

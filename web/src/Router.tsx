@@ -5,6 +5,7 @@ import SettingsPage from "./pages/profile/settings/SettingsPage.tsx";
 import ProjectsPage from "@/pages/projects/ProjectsPage.tsx";
 import ProjectPage from "@/pages/projects/pages/[id]/ProjectPage.tsx";
 import Board from "@/pages/projects/pages/[id]/pages/boards/[boardId]/Board.tsx";
+import TeamPage from "@/pages/projects/pages/[id]/pages/team";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/projects/:id",
     element: <ProjectPage />,
+  },
+  {
+    path: "/projects/:id/team",
+    element: <TeamPage />,
   },
   {
     path: "/projects/:id/boards/:boardId",

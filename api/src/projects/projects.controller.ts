@@ -37,6 +37,11 @@ export class ProjectsController {
     return this.projectsService.findOne(+id);
   }
 
+  @Get(':id/team')
+  findOneTeam(@Param('id') id: string) {
+    return this.projectsService.findOneTeam(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectsService.update(+id, updateProjectDto);

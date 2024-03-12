@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Project, Prisma } from "shared";
+import { Project, Prisma, ProjectMember } from "shared";
 import { GetRequestById, PostRequest } from "@/api/types";
 
 export const getPaginatedProjects = async (
@@ -37,5 +37,11 @@ export type ProjectWithMembers = Prisma.ProjectGetPayload<{
     boards: true;
   };
 }>;
+
+export const getProjectTeamById: GetRequestById<{
+  members: ProjectMember[];
+}> = async (id) => {
+  return (await axios.get(`/projects/${id}/team`)).data;
+};
 
 export default createProject;

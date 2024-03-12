@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Actions from "@/pages/projects/pages/[id]/components/Actions.tsx";
 import { Card, CardContent } from "@components/ui/Card.tsx";
 import React from "react";
-import { Users } from "lucide-react";
+import { Plus, Users } from "lucide-react";
 
 const Heading = (props: ProjectWithMembers) => {
   const owner = getOwnerProject(props);
@@ -25,11 +25,15 @@ const Heading = (props: ProjectWithMembers) => {
                 avatarUrl={owner.user.avatarUrl}
                 label={owner.user.lastName + " " + owner.user.lastName}
               />
-              <div>
-                <div className="flex items-center gap-1">
+              <div className="flex">
+                <Link
+                  to={`/projects/${props.id}/team`}
+                  className="flex items-center gap-1 bg-muted hover:bg-primary/20 transition py-1 px-2 rounded-full cursor-pointer"
+                >
                   <Users size={20} />
                   {props.members.length}
-                </div>
+                  <Plus size={14} />
+                </Link>
               </div>
             </div>
           </div>
